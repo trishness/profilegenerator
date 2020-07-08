@@ -11,7 +11,7 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const { inherits } = require("util");
 
-employeeArray= [];
+employees= [];
 
 function init() {
     inquirer.prompt(
@@ -63,10 +63,10 @@ function init() {
                         }
                     )
                     .then(function(githubResponse){
-                        const newEngineer = new Engineer(answer.name, answer.id, answer.email, githubResponse.github)
-                        console.log(newEngineer);
-                        employeeArray.push(newEngineer);
-                        console.log(employeeArray);
+                        const engineer = new Engineer(answer.name, answer.id, answer.email, githubResponse.github)
+                        console.log(engineer);
+                        employees.push(engineer);
+                        console.log(employees);
                         init();
                     })
                 }
@@ -79,9 +79,9 @@ function init() {
                         }
                     )
                     .then(function(officeNumberResponse){
-                        const newManager = new Manager(answer.name, answer.id, answer.email, officeNumberResponse.officeNumber)
-                        console.log(newManager);
-                        employeeArray.push(newManager);
+                        const manager = new Manager(answer.name, answer.id, answer.email, officeNumberResponse.officeNumber)
+                        console.log(manager);
+                        employees.push(manager);
                         init();
                     })
                 }
@@ -94,14 +94,15 @@ function init() {
                         }
                     )
                     .then(function(schoolResponse){
-                        const newIntern = new Intern(answer.name, answer.id, answer.email, schoolResponse.school)
-                        console.log(newIntern);
-                        employeeArray.push(newIntern);
+                        const intern = new Intern(answer.name, answer.id, answer.email, schoolResponse.school)
+                        console.log(intern);
+                        employees.push(intern);
                         init();
                     })
                 }
             })
         } else {
+            render(employees);
             function writeToFile(fileName, data) {
                 fs.writeFile(fileName, data, function(error){
                     if (error) throw error;
@@ -114,7 +115,7 @@ function init() {
         if (err) throw err
     })
 }
-console.log(employeeArray);
+console.log(employees);
 init();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
