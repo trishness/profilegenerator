@@ -60,22 +60,61 @@ function init() {
                             type:"input",
                             message:"What is your GitHub username?",
                             name: "github"
-                    })
-                    .then(function(githubresponse){
-                        const newEngineer = new Engineer(answer.name, answer.id, answer.email, githubresponse.github)
+                        }
+                    )
+                    .then(function(githubResponse){
+                        const newEngineer = new Engineer(answer.name, answer.id, answer.email, githubResponse.github)
                         console.log(newEngineer);
                         employeeArray.push(newEngineer);
+                        console.log(employeeArray);
+                        init();
+                    })
+                }
+                else if (answer.role === "Manager") {
+                    inquirer.prompt(
+                        {
+                            type:"input",
+                            message: "What is your office number?",
+                            name: "officeNumber"
+                        }
+                    )
+                    .then(function(officeNumberResponse){
+                        const newManager = new Manager(answer.name, answer.id, answer.email, officeNumberResponse.officeNumber)
+                        console.log(newManager);
+                        employeeArray.push(newManager);
+                        init();
+                    })
+                }
+                else if (answer.role === "Intern") {
+                    inquirer.prompt(
+                        {
+                            type:"input",
+                            message:"What school do you attend?",
+                            name: "school"
+                        }
+                    )
+                    .then(function(schoolResponse){
+                        const newIntern = new Intern(answer.name, answer.id, answer.email, schoolResponse.school)
+                        console.log(newIntern);
+                        employeeArray.push(newIntern);
+                        init();
                     })
                 }
             })
         } else {
-            //write html file
+            function writeToFile(fileName, data) {
+                fs.writeFile(fileName, data, function(error){
+                    if (error) throw error;
+                    console.log(success);
+                })
+                //writetoFile("htmlRenderer.js")
+            }
         }
     }).catch(function(err){
         if (err) throw err
     })
 }
-
+console.log(employeeArray);
 init();
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
