@@ -13,6 +13,13 @@ const { inherits } = require("util");
 
 employees= [];
 
+function writeToFile(fileName, data){
+    fs.writeFile(fileName, data, function(error){
+        if (error) throw error;
+        console.log("success");
+    })
+}
+
 function init() {
     inquirer.prompt(
     {
@@ -102,14 +109,9 @@ function init() {
                 }
             })
         } else {
-            render(employees);
-            function writeToFile(fileName, data) {
-                fs.writeFile(fileName, data, function(error){
-                    if (error) throw error;
-                    console.log(success);
-                })
-                //writetoFile("htmlRenderer.js")
-            }
+            const output = render(employees);
+            console.log(render(employees))
+            writeToFile("team.html", output)
         }
     }).catch(function(err){
         if (err) throw err
