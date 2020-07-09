@@ -5,4 +5,7 @@ This assignment dynamically creates a team page for a group of employees. Upon r
 GitHub repository:
 https://github.com/trishness/profilegenerator
 
+Video Walkthrough:
+https://drive.google.com/file/d/1wW7EwIojZC56WUP2T-DYythhPYlZPJ2g/view
+
 ![alt text](./profilegenerator.jpg?raw=true)
